@@ -79,12 +79,12 @@ La parelización se llevo mediante el primer for con la creacion de un arreglo d
 ## Part III Performance Evaluation
 
 1. un Hilo
-   ![](img/unHilo.PNG)
+   ![](img/unHilo.png)
 2. Tantos hilos como procesadores
-   ![](img/hilosProcesadores.PNG)
+   ![](img/hilosProcesadores.png)
 3. Tantos hilos como el doble de procesadores
-   ![](img/hilosDoblePro.PNG)
+   ![](img/hilosDoblePro.png)
 4. 200 hilos
-   ![](img/200h.PNG)
+   ![](img/200h.png)
 5. 500 hilos
-   ![](img/500h.PNG)
+   ![](img/500h.png)
