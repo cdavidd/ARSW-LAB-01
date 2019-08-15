@@ -20,8 +20,12 @@ public class Main {
         //System.out.println("Calculando");
         //int p = Runtime.getRuntime().availableProcessors();
         //System.out.println(p);
-        DigitCalculation digitCalculation = new DigitCalculation(10);
-        System.out.println(digitCalculation.calcular(0,100));
+        double seconds = 0;
+        DigitCalculation digitCalculation = new DigitCalculation(200);
+        long start = System.currentTimeMillis();
+        System.out.println(digitCalculation.calcular(0,25000));
+        seconds = (double) (System.currentTimeMillis()-start)/1000;
+        System.out.println("Segundos: " + seconds);
     }
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
