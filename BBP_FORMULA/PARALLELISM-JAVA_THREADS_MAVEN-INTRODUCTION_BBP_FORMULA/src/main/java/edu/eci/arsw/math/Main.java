@@ -19,8 +19,8 @@ public class Main {
         System.out.println(bytesToHex(PiDigits.getDigits(0, 100)));
         //System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000)));
         System.out.println("Calculando");
-        DigitCalculation digitCalculation = new DigitCalculation(2);
-        digitCalculation.calcular();
+        DigitCalculation digitCalculation = new DigitCalculation(7);
+        System.out.println(digitCalculation.calcular(0,100));
     }
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();

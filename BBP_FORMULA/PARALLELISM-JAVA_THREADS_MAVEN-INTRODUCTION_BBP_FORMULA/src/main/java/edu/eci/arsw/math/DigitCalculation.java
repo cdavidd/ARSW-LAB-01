@@ -3,27 +3,33 @@ package edu.eci.arsw.math;
 public class DigitCalculation{
 
     private int n;
-    private Thread piDigitsThread[];
+    private DigitThread piDigitsThread[];
 
     public DigitCalculation(int n){
         this.n = n;
         piDigitsThread = new DigitThread[n];
     }
 
-    public byte[] calcular(){
+    public String calcular(int start, int numberOfDigits){
+        int step = numberOfDigits / n;
+        int remainder = numberOfDigits % n;
+        int end;
         for(int i=0;i<n;i++){
-            int start= i* (100/n);
-            int end = (i+1)*(100/n)+1 - start;
-            System.out.println("Rango: " + start + " " + end);
-            piDigitsThread[i] = new DigitThread(start,end);
+            end = start + step;
+            if (remainder > 0){ end++; remainder--; }
+            piDigitsThread[i] = new DigitThread(start,end-start);
             piDigitsThread[i].start();
             try {
                 piDigitsThread[i].join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            start = end;
         }
-        return null;
+        StringBuilder digitsBuilder = new StringBuilder();
+        for (DigitThread digitThread : piDigitsThread){
+            digitsBuilder.append(digitThread.getByteAnswer());
+        }
+        return digitsBuilder.toString();
     }
 }

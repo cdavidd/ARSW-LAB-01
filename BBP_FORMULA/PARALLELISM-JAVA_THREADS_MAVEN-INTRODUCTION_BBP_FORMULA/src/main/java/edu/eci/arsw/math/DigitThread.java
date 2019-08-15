@@ -2,16 +2,21 @@ package edu.eci.arsw.math;
 
 public class DigitThread extends Thread{
 
-    private int a;
-    private int b;
+    private int start;
+    private int count;
+    private String byteAnswer;
 
-    public DigitThread(int a,int b){
-        this.a = a;
-        this.b = b;
+    public DigitThread(int start,int count){
+        this.start = start;
+        this.count = count;
+    }
+
+    public String getByteAnswer(){
+        return this.byteAnswer;
     }
 
     @Override
     public void run() {
-        System.out.println(Main.bytesToHex(PiDigits.getDigits(a,b-1)));
+        byteAnswer = Main.bytesToHex(PiDigits.getDigits(start,count));
     }
 }
