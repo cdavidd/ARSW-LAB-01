@@ -14,12 +14,13 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String a[]) {
-
         //System.out.println(bytesToHex(PiDigits.getDigits(0, 10)));
-        System.out.println(bytesToHex(PiDigits.getDigits(0, 100)));
+        //System.out.println(bytesToHex(PiDigits.getDigits(0, 100)));
         //System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000)));
-        System.out.println("Calculando");
-        DigitCalculation digitCalculation = new DigitCalculation(7);
+        //System.out.println("Calculando");
+        //int p = Runtime.getRuntime().availableProcessors();
+        //System.out.println(p);
+        DigitCalculation digitCalculation = new DigitCalculation(10);
         System.out.println(digitCalculation.calcular(0,100));
     }
 

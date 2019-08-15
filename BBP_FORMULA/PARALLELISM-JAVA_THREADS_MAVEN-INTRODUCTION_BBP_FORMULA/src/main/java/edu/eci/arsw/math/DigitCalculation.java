@@ -20,13 +20,16 @@ public class DigitCalculation{
             if (remainder > 0){ end++; remainder--; }
             piDigitsThread[i] = new DigitThread(start,end-start);
             piDigitsThread[i].start();
+            start = end;
+        }
+        for (int i = 0; i < n ; i++){
             try {
                 piDigitsThread[i].join();
                 digitsBuilder.append(piDigitsThread[i].getByteAnswer());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.err.println("Error " + e.getMessage());
+                System.exit(1);
             }
-            start = end;
         }
         return digitsBuilder.toString();
     }
