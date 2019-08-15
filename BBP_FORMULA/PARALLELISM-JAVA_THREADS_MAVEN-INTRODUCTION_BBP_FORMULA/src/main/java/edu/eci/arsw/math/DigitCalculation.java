@@ -14,6 +14,7 @@ public class DigitCalculation{
         int step = numberOfDigits / n;
         int remainder = numberOfDigits % n;
         int end;
+        StringBuilder digitsBuilder = new StringBuilder();
         for(int i=0;i<n;i++){
             end = start + step;
             if (remainder > 0){ end++; remainder--; }
@@ -21,14 +22,11 @@ public class DigitCalculation{
             piDigitsThread[i].start();
             try {
                 piDigitsThread[i].join();
+                digitsBuilder.append(piDigitsThread[i].getByteAnswer());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             start = end;
-        }
-        StringBuilder digitsBuilder = new StringBuilder();
-        for (DigitThread digitThread : piDigitsThread){
-            digitsBuilder.append(digitThread.getByteAnswer());
         }
         return digitsBuilder.toString();
     }
