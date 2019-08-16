@@ -14,17 +14,29 @@ public class Main extends JFrame implements KeyListener {
         pft.start();
         */
         Main tes= new Main();
-        tes.inicializador();
-        
-        
     }
+
     public Main(){
+        inicializador();
+        threadStart();
+    }
+
+    public void threadStart(){
         pft1=new PrimeFinderThread(0, 10000000);
         pft2=new PrimeFinderThread(10000001, 20000000);
         pft3=new PrimeFinderThread(20000001, 30000000);
+
+        long start = System.currentTimeMillis();
         pft1.start();
         pft2.start();
         pft3.start();
+        long elapsed;
+        do{
+            elapsed = System.currentTimeMillis() - start;
+        }while (elapsed < 5000);
+        pft1.suspend();
+        pft2.suspend();
+        pft3.suspend();
     }
     
     private void inicializador() {
@@ -45,9 +57,9 @@ public class Main extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_ENTER) {
-            pft1.suspend();
-            pft2.suspend();
-            pft3.suspend();
+            pft1.resume();
+            pft2.resume();
+            pft3.resume();
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
