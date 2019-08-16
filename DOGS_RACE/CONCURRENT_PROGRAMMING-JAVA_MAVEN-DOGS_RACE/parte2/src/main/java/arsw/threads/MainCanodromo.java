@@ -2,6 +2,8 @@ package arsw.threads;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 
@@ -24,7 +26,7 @@ public class MainCanodromo {
 
                     @Override
                     public void actionPerformed(final ActionEvent e) {
-						//como acción, se crea un nuevo hilo que cree los hilos
+                        //como acción, se crea un nuevo hilo que cree los hilos
                         //'galgos', los pone a correr, y luego muestra los resultados.
                         //La acción del botón se realiza en un hilo aparte para evitar
                         //bloquear la interfaz gráfica.
@@ -38,7 +40,13 @@ public class MainCanodromo {
                                     galgos[i].start();
 
                                 }
-                               
+                                for (int i=0; i< can.getNumCarriles();i++){
+                                    try {
+                                        galgos[i].join();
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(MainCanodromo.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
 				can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1); 
                                 System.out.println("El ganador fue:" + reg.getGanador());
                             }
@@ -53,6 +61,10 @@ public class MainCanodromo {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("Carrera pausada!");
+                        //agrege esto
+                        for (int i=0; i< can.getNumCarriles();i++){
+                            galgos[i].suspend();
+                        }                        
                     }
                 }
         );
@@ -62,6 +74,10 @@ public class MainCanodromo {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("Carrera reanudada!");
+                        //agregue esto
+                        for (int i=0; i< can.getNumCarriles();i++){
+                            galgos[i].resume();
+                        }
                     }
                 }
         );
