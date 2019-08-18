@@ -4,19 +4,19 @@ public class DigitThread extends Thread{
 
     private int start;
     private int count;
-    private String byteAnswer;
+    private byte[] byteAnswer;
 
     public DigitThread(int start,int count){
         this.start = start;
         this.count = count;
     }
 
-    public String getByteAnswer(){
+    public byte[] getByteAnswer(){
         return this.byteAnswer;
     }
 
     @Override
     public void run() {
-        byteAnswer = Main.bytesToHex(PiDigits.getDigits(start,count));
+        byteAnswer = PiDigits.getDigits(start,count);
     }
 }

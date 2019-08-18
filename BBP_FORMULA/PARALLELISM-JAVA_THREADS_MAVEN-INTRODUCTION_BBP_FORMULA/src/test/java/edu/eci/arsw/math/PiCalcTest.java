@@ -7,6 +7,10 @@ package edu.eci.arsw.math;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -49,4 +53,38 @@ public class PiCalcTest {
         }
     }
 
+    @Test
+    public void piGenOneThreadTest() {
+        byte[] oneThreadDigits = PiDigits.getDigits(0, 1000);
+        List<byte[]> oneThread = new DigitCalculation(1).calcular(0, 1000);
+        assertArrayEquals(oneThreadDigits,oneThread.get(0));
+    }
+
+    @Test
+    public void piGenEvenNumberOfThreadsTest(){
+        byte[] oneThreadDigits = PiDigits.getDigits(0,1000);
+        List<byte[]> evenThreadsDigits = new DigitCalculation(2).calcular(0,1000);
+
+        int position = 0;
+        for (byte[] threadAnswer : evenThreadsDigits){
+            for (byte digit : threadAnswer ){
+                assertEquals(digit,oneThreadDigits[position]);
+                position++;
+            }
+        }
+    }
+
+    @Test
+    public void piGenOddNumberOfThreadsTest(){
+        byte[] oneThreadDigits = PiDigits.getDigits(0,1000);
+        List<byte[]> oddThreadsDigits = new DigitCalculation(3).calcular(0,1000);
+
+        int position = 0;
+        for (byte[] threadAnswer : oddThreadsDigits){
+            for (byte digit : threadAnswer ){
+                assertEquals(digit,oneThreadDigits[position]);
+                position++;
+            }
+        }
+    }
 }

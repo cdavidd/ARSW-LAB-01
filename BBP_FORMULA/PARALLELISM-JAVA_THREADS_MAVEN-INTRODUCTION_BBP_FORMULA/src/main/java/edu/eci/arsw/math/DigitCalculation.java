@@ -1,5 +1,8 @@
 package edu.eci.arsw.math;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DigitCalculation{
 
     private int n;
@@ -10,11 +13,11 @@ public class DigitCalculation{
         piDigitsThread = new DigitThread[n];
     }
 
-    public String calcular(int start, int numberOfDigits){
+    public List<byte[]> calcular(int start, int numberOfDigits){
+        List<byte[]> answer = new ArrayList<>();
         int step = numberOfDigits / n;
         int remainder = numberOfDigits % n;
         int end;
-        StringBuilder digitsBuilder = new StringBuilder();
         for(int i=0;i<n;i++){
             end = start + step;
             if (remainder > 0){ end++; remainder--; }
@@ -25,12 +28,12 @@ public class DigitCalculation{
         for (int i = 0; i < n ; i++){
             try {
                 piDigitsThread[i].join();
-                digitsBuilder.append(piDigitsThread[i].getByteAnswer());
+                answer.add(piDigitsThread[i].getByteAnswer());
             } catch (InterruptedException e) {
                 System.err.println("Error " + e.getMessage());
                 System.exit(1);
             }
         }
-        return digitsBuilder.toString();
+        return answer;
     }
 }
