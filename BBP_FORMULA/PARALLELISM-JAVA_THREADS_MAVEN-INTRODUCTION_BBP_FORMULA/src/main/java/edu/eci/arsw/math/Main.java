@@ -21,10 +21,10 @@ public class Main {
         //int p = Runtime.getRuntime().availableProcessors();
         //System.out.println(p);
         double seconds = 0;
-        DigitCalculation digitCalculation = new DigitCalculation(200);
-        long start = System.currentTimeMillis();
-        System.out.println(digitCalculation.calcular(0,25000));
-        seconds = (double) (System.currentTimeMillis()-start)/1000;
+        DigitCalculation digitCalculation = new DigitCalculation(500);
+        long start = System.nanoTime();
+        digitCalculation.calcular(0,50000);
+        seconds = (double) (System.nanoTime()-start)/1000000000;
         System.out.println("Segundos: " + seconds);
     }
 

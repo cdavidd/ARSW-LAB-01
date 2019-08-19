@@ -39,48 +39,54 @@ public class CountThreadsMain {
 }
 ```
 
-Los resultados al empezar los 3 threads mediante el método `start()` se obtuvo el siguente resultado:
+Los resultados al empezar los 3 threads mediante el método `start()` se obtuvo el siguiente resultado:
 ![](img/start_count.PNG)
 
-Como se aprecia en la imagen, no existe un orden de ejecución al iniciar los hilos.
+Los resultados al empezar los 3 threads mediante el método `run()` se obtuvo el siguiente resultado:
+![](img/met_run.JPG)
+
+La salida cambia, esto se debe a que el método `start()` empieza la ejecución del hilo mientras que el método `run()` invoca la función, es decir que se ejecuta en el único hilo (main).
 
 ## Part II BBP Formula Exercise
 
-Se creo la funcion calcular para hacer la partición y union de los datos que nos retorna el hilo.
+Se creó la función `calcular()` para hacer la partición y union de los datos que nos retornan los hilos.
 
 ```java
-public String calcular(int start, int numberOfDigits){
-        int step = numberOfDigits / n;
-        int remainder = numberOfDigits % n;
-        int end;
-        StringBuilder digitsBuilder = new StringBuilder();
-        for(int i=0;i<n;i++){
-            end = start + step;
-            if (remainder > 0){ end++; remainder--; }
-            piDigitsThread[i] = new DigitThread(start,end-start);
-            piDigitsThread[i].start();
-            start = end;
-        }
-        for (int i = 0; i < n ; i++){
-            try {
-                piDigitsThread[i].join();
-                digitsBuilder.append(piDigitsThread[i].getByteAnswer());
-            } catch (InterruptedException e) {
-                System.err.println("Error " + e.getMessage());
-                System.exit(1);
+public class DigitCalculation{
+   
+    public List<byte[]> calcular(int start, int numberOfDigits){
+            List<byte[]> answer = new ArrayList<>();
+            int step = numberOfDigits / n;
+            int remainder = numberOfDigits % n;
+            int end;
+            for(int i=0;i<n;i++){
+                end = start + step;
+                if (remainder > 0){ end++; remainder--; }
+                piDigitsThread[i] = new DigitThread(start,end-start);
+                piDigitsThread[i].start();
+                start = end;
             }
-        }
-        return digitsBuilder.toString();
+            for (int i = 0; i < n ; i++){
+                try {
+                    piDigitsThread[i].join();
+                    answer.add(piDigitsThread[i].getByteAnswer());
+                } catch (InterruptedException e) {
+                    System.err.println("Error " + e.getMessage());
+                    System.exit(1);
+                }
+            }
+            return answer;
     }
+}
 ```
 
-La parelización se llevo mediante el primer for con la creacion de un arreglo de Threads, en cada uno de estos se repartiran los datos a calcular e iniciar su proceso, despues mediante el segundo for se hace el metodo join() para que cuando finalize cada Thread se agregue la respuesta y poderla retornar.
-
+La paralelización se llevó mediante el primer for con la creación de un arreglo de Threads, en cada uno de estos se repartirán los datos a calcular e iniciar su proceso, después mediante el segundo for se hace el método join() para que cuando finalice cada Thread se agregue la respuesta y poderla retornar.
 ## Part III Performance Evaluation
+A continuación, se muestran los resultados de jVisualVM al realizar el cálculo de un millón de dígitos de PI, sin embargo, no se obtuvo el resultado debido a que el tiempo en ejecución era extenso.
 
-1. un Hilo
+1. Un hilo
    ![](img/unHilo.png)
-2. Tantos hilos como procesadores
+2. Tantos hilos como procesadores (4)
    ![](img/hilosProcesadores.png)
 3. Tantos hilos como el doble de procesadores
    ![](img/hilosDoblePro.png)
@@ -88,3 +94,27 @@ La parelización se llevo mediante el primer for con la creacion de un arreglo d
    ![](img/200h.png)
 5. 500 hilos
    ![](img/500h.png)
+
+Para poder responder las preguntas de la sección se limitó la cantidad de dígitos de PI a 50000.
++ **Un hilo**
+     + Tiempo: 86.5099263 segundos. 
++ **Tantos hilos como procesadores (4)**
+    + Tiempo: 49.2673722 segundos. 
++ **Tantos hilos como el doble de procesadores**
+    + Tiempo: 40.2675832 segundos.
++ **200 hilos**
+    + Tiempo: 34.801275 segundos.
++ **500 hilos**
+    + Tiempo: 35.6599393 segundos.
+    
+1) Mirando los resultados anteriores, aunque sea una variación de casi un segundo, 
+usar doscientos hilos es más efectivo que usar quinientos, esto puede deberse a 
+que toca guardar el estado de cada hilo y para cada uno restaurarlo al momento de
+su ejecución.
+
+2) Utilizar tantos hilos como el doble de procesadores es más efectivo que 
+utilizar la misma cantidad de hilos como de procesadores. Se realiza un mejor
+ uso de los procesadores ya que cada procesador puede hacerse cargo de un hilo 
+ extra que no implica una gran carga.
+ 
+ 3) 
