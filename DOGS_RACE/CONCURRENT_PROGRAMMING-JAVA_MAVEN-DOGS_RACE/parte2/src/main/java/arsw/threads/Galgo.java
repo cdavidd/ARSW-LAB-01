@@ -10,6 +10,7 @@ public class Galgo extends Thread {
     private Carril carril;
     RegistroLlegada regl;
     private boolean enPausa;
+    private int ubicacion;
 
     public static Object monitor = MainCanodromo.monitor;
 
@@ -34,7 +35,7 @@ public class Galgo extends Thread {
                 if (paso == carril.size()) {
                     carril.finish();
                     synchronized (regl) {
-                        int ubicacion = regl.getUltimaPosicionAlcanzada();
+                        ubicacion = regl.getUltimaPosicionAlcanzada();
                         //regl.setUltimaPosicionAlcanzada(ubicacion+1);
                         regl.setUltimaPosicionAlcanzada();
                         System.out.println("El galgo " + this.getName() + " llego en la posicion " + ubicacion);
@@ -70,5 +71,8 @@ public class Galgo extends Thread {
             e.printStackTrace();
         }
     }
-
+    
+    public int getUbicacion(){
+        return ubicacion;
+    }
 }
