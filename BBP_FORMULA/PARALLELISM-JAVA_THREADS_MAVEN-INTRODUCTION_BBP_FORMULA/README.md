@@ -43,6 +43,7 @@ Los resultados al empezar los 3 threads mediante el método `start()` se obtuvo 
 ![](img/start_count.PNG)
 
 Los resultados al empezar los 3 threads mediante el método `run()` se obtuvo el siguiente resultado:
+
 ![](img/met_run.JPG)
 
 La salida cambia, esto se debe a que el método `start()` empieza la ejecución del hilo mientras que el método `run()` invoca la función, es decir que se ejecuta en el único hilo (main).
