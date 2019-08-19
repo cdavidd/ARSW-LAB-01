@@ -1,3 +1,14 @@
+## Compile and run instructions
+
+Entrar al directorio `ARSW-LAB-01/BBP_FORMULA/PARALLELISM-JAVA_THREADS_MAVEN-INTRODUCTION_BBP_FORMULA`
+
+* **Para compilar:** Ejecutar `mvn package`
+* **Para ejecutar CountThread:** Ejecutar `mvn exec:java -Dexec.mainClass="edu.eci.arsw.threads.CountThreadsMain"`
+
+* **Para ejecutar PiDigits:** Ejecutar `mvn exec:java -Dexec.mainClass="edu.eci.arsw.math.Main"`
+
+* **Para ejecutar las pruebas:** Ejecutar `mvn test`
+
 ## Part I - Introduction to Java Threads
 
 Se completó el método la clase `CountThread`, esta es la implementación:

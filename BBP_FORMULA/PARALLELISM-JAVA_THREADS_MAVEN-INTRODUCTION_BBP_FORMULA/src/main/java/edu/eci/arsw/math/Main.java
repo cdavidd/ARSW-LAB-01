@@ -6,6 +6,7 @@
 package edu.eci.arsw.math;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -21,10 +22,15 @@ public class Main {
         //int p = Runtime.getRuntime().availableProcessors();
         //System.out.println(p);
         double seconds = 0;
-        DigitCalculation digitCalculation = new DigitCalculation(500);
+        DigitCalculation digitCalculation = new DigitCalculation(200);
         long start = System.nanoTime();
-        digitCalculation.calcular(0,50000);
+        List<byte[]> digitos = digitCalculation.calcular(0,50000);
         seconds = (double) (System.nanoTime()-start)/1000000000;
+        StringBuilder respuesta = new StringBuilder();
+        for (byte[] digitosByte :  digitos ){
+            respuesta.append(bytesToHex(digitosByte));
+        }
+        System.out.println(respuesta);
         System.out.println("Segundos: " + seconds);
     }
 
