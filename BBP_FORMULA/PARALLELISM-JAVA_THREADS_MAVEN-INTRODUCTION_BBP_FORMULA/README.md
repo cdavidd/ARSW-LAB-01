@@ -114,8 +114,8 @@ que toca guardar el estado de cada hilo y para cada uno restaurarlo al momento d
 su ejecución.
 
 2) Utilizar tantos hilos como el doble de procesadores es más efectivo que 
-utilizar la misma cantidad de hilos como de procesadores. Se realiza un mejor
- uso de los procesadores ya que cada procesador puede hacerse cargo de un hilo 
+utilizar la misma cantidad de hilos como cantidad de procesadores. Se realiza un mejor
+ uso de los procesadores ya que cada uno puede hacerse cargo de un hilo 
  extra que no implica una gran carga.
  
  3) 
