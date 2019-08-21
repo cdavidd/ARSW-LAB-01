@@ -9,8 +9,8 @@ Entrar al directorio `ARSW-LAB-01/DOGS_RACE/CONCURRENT_PROGRAMMING-JAVA_MAVEN-DO
 - **Para ejecutar las pruebas:** Ejecutar `mvn test`
 
 ## Part I
-
-2.  Verificación con tres hilos.
+1. Verificación con un hilo, en el administrador de tareas de Windows se puede ver como el programa al ejecutarse utiliza a lo mucho 2 CPU, estas cambian de 00 a 02.
+2.  Verificación con tres hilos, en el administrador de tareas de Windows se puede ver como el programa al ejecutarse utiliza a lo mucho 4 CPU, estas cambian de 00 a 03 a 04 a 02.
 
 ```java
 public class Main {

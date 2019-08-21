@@ -129,4 +129,4 @@ utilizar la misma cantidad de hilos como cantidad de procesadores. Se realiza un
  uso de los procesadores ya que cada uno puede hacerse cargo de un hilo 
  extra que no implica una gran carga.
  
- 3) 
+ 3) Según la ley de Amdahls, el programa será menos eficiente al agregar más CPUs , por lo que tener 500 CPUs cada una para un hilo no se estaría usando la máxima capacidad del procesador. En cambio si se tienen c hilos y se distribuyen sobre 500 CPUs entonces estas estarían usándose de mejor manera al tener que manejar esos hilos por lo que la ley de Amdahls será mejor aplicada.
